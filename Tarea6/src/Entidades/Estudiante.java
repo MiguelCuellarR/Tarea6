@@ -5,10 +5,26 @@
  */
 package Entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Lorena
  */
 public class Estudiante {
     
+    private String cedula;
+    private String nombre;
+    private List<Materia> materias;
+    
+    public Estudiante(String cedula, String nombre){
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.materias = new ArrayList<Materia>();
+    }
+     
+    public String getCedula(){
+        return this.cedula;
+    }
 }
