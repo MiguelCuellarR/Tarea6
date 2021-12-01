@@ -7,7 +7,7 @@ package Gui;
 
 /**
  *
- * @author Lorena
+ * @author Lorena Naranjo
  */
 public class Ventana {
 
