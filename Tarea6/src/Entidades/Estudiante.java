@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *Clase estudiante con sus atributos
+ * Métodos get
+ * Contructores
  * @author Lorena
  */
 public class Estudiante {

@@ -6,6 +6,7 @@
 package Control;
 
 import Entidades.Estudiante;
+import Excepciones.ArchivoException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Se encuentran los métodos para saber cuantas materia tiene un estudiante 
+ * inscritas.
  * @author Lorena
  */
 public class ControlEstudiantes {
@@ -30,7 +32,20 @@ public class ControlEstudiantes {
         this.estudiantes = new ArrayList<Estudiante>();
     }
     
-    public String materiasPorEstudiante(File archivo) throws FileNotFoundException{
+    /**
+     * Método para seleccionar el dato necesario para la información 
+     * requerida que se tenga en el mensaje en este caso.
+     * @param archivo
+     * @return un mensaje con la información que se pide
+     * @throws FileNotFoundException
+     * @throws ArchivoException 
+     */
+    
+    public String materiasPorEstudiante(File archivo) throws FileNotFoundException, ArchivoException{
+       if (archivo == null) {
+           throw new ArchivoException("El archivo es nulo");
+       }
+        
         String mensaje = "";
         FileReader fr = new FileReader (archivo);
         BufferedReader br = new BufferedReader(fr);
@@ -50,7 +65,6 @@ public class ControlEstudiantes {
                     
                     Estudiante estudiante = new Estudiante(partes[0], partes[1]);
                     estudiantes.add(estudiante);
-                    
                 }
                 linea = br.readLine();
             }
@@ -60,6 +74,13 @@ public class ControlEstudiantes {
         return mensaje;
     }
     
+    /**
+     * Método para contar cuantas veces se encuentra la identificación de 
+     * un estudiante.
+     * @param cedula
+     * @param archivo
+     * @return el total de incidencias que hay en el archivo plano.
+     */
     public static int buscarCedula(String cedula, File archivo) {
         int totalIncidencias = 0;
         try {
