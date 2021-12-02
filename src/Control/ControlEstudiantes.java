@@ -6,6 +6,7 @@
 package Control;
 
 import Entidades.Estudiante;
+import Excepciones.ArchivoException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +20,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Clase de Control de estudiantes con métodos para 
+ * contar ls materias que tiene inscritas cada materia
+ * según el archivo plano que se ingrese.
+ * 
  * @author Lorena
  */
 public class ControlEstudiantes {
@@ -30,7 +34,22 @@ public class ControlEstudiantes {
         this.estudiantes = new ArrayList<Estudiante>();
     }
     
-    public String materiasPorEstudiante(File archivo) throws FileNotFoundException{
+    /**
+     * Método donde se identifica el dato correspondiente
+     * para imprimirlo en el mensaje.
+     * @param archivo
+     * @return un mensaje con el nombre del estudiante y el total
+     * de materias inscritas.
+     * @throws FileNotFoundException
+     * @throws ArchivoException 
+     */
+    
+    public String materiasPorEstudiante(File archivo) throws 
+            FileNotFoundException, ArchivoException{
+        if(archivo == null){
+            throw new ArchivoException("El archivo es nulo.");
+        }
+        
         String mensaje = "";
         FileReader fr = new FileReader (archivo);
         BufferedReader br = new BufferedReader(fr);
@@ -61,6 +80,13 @@ public class ControlEstudiantes {
         return mensaje;
     }
     
+    /**
+     * Método buscar un estudiantes por su cédula 
+     * recorriendo los elementos del archivo plano
+     * @param cedula
+     * @param archivo
+     * @return total de incidencias de la cédula del estudiante.
+     */
     public static int buscarCedula(String cedula, File archivo) {
         int totalIncidencias = 0;
         try {

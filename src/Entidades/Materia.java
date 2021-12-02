@@ -6,7 +6,9 @@
 package Entidades;
 
 /**
- *
+ *Clase Materia con sus respectivos atributos y 
+ * sus constructores.
+ * Métodos get.
  * @author Lorena
  */
 public class Materia {
