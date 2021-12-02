@@ -36,21 +36,23 @@ public class ControlEstudiantes {
         BufferedReader br = new BufferedReader(fr);
         
         Set<String> cedulasRevisadas = new HashSet<String>();
-        String linea;
-        
         try {
-            while((linea=br.readLine())!=null) {
-                String[] partes = linea.split(" ");
+            String linea = br.readLine();
+            
+            while(linea != null) {
+                String[] partes = linea.split(",");
+                System.out.println(partes[0]);
                 if (!cedulasRevisadas.contains(partes[0])){
                     int incidencias = this.buscarCedula(partes[0], archivo);
-                    mensaje = partes[1] + incidencias + "Materias\n";
+                    mensaje += partes[1] + " " + incidencias + " Materias\n";
                     
                     cedulasRevisadas.add(partes[0]);
                     
                     Estudiante estudiante = new Estudiante(partes[0], partes[1]);
                     estudiantes.add(estudiante);
+                    
                 }
-                
+                linea = br.readLine();
             }
         } catch (IOException ex) {
             Logger.getLogger(ControlEstudiantes.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,7 +70,7 @@ public class ControlEstudiantes {
                 
                 while ((lineaLeida = archivoLeer.readLine()) != null) {
 
-                    String[] partes = lineaLeida.split(" ");
+                    String[] partes = lineaLeida.split(",");
 
                     for (int i = 0; i < partes.length; i++) {
                         if (partes[i].equals(cedula)) {
